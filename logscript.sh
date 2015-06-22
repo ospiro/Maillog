@@ -23,24 +23,32 @@ for(i=10;i<=NF;++i){	        	#This loop makes sure to send the entire subject l
         print "\n";
         break;
     }
-    if($i~/.Subject:.*/){print $i;}
-    else{print $i ",";}                      #Awk normally would delete the commas, so it is necessary to put them back in.
+    if($i~/.Subject:.*/){
+        print $i;
+    }
+    else{
+        print $i ",";
+    }  	 	                        #Awk normally would delete the commas, so it is necessary to put them back in.
 }
 
 }' | awk -v ORS="" '{
 
 
 if($9=="MYNETS"){				#This if statement deals with the occasional case wherein the source IP is preceded by "MYNETS LOCAL"
-print $1 " " $2 " " $3 " " $12 " " $13 " ";
-for(i=16;i<=NF;++i){print $i " "}
-print "\n";
+    print $1 " " $2 " " $3 " " $12 " " $13 " ";
+    for(i=16;i<=NF;++i){
+        print $i " ";
+    }
+    print "\n";
 }
 
 
 if ($9!="MYNETS"){				#This is the other case
-print $1 " " $2 " " $3 " " $10 " " $11 " ";
-for(i=14;i<=NF;++i){print $i " "}
-print "\n";
+    print $1 " " $2 " " $3 " " $10 " " $11 " ";
+    for(i=14;i<=NF;++i){
+        print $i " ";
+    }
+    print "\n";
 }
 
 }'
